@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to(root_url) if !current_user?(user) 
+      redirect_to @user
     else
       render 'edit'
     end
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
 
   def collect_user
     @user = User.find(params[:id])
-    redirect_to(root_url) if @user != current_user
+    redirect_to(root_url) if !current_user?(@user)
   end
 
 end

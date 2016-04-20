@@ -2,3 +2,7 @@
   <%= gravatar_for @user %>
   <%= @user.name %>
 </h1>
+<ul>
+  <li>region:　<%= @user.region %></li>
+  <li><%= current_user == @user ? "email :　#{@user.email}" : "--private--" %></li>
+</ul>
