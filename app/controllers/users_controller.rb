@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_action :logged_in_user, only: [:following, :followers]
   before_action :collect_user, only: [:edit, :update] 
 
   def show # 追加
@@ -33,6 +33,20 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+  
+  def following
+    @title = 'followings'
+    @user = User.find(params[:id])
+    @users =  @user.following_users
+    render 'show_follow'
+  end
+  
+  def followers
+    @title = 'followers'
+    @user = User.find(params[:id])
+    @users = @user.follower_users
+    render 'show_follow'
   end
 
   private
